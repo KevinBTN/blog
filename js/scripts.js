@@ -18,7 +18,7 @@ const fetchPosts = () =>{
     .then(response => response.json())
     .then(posts => {
         for(let postsCounter = 0; postsCounter < 10; postsCounter++){
-            if(location.pathname=="/index.html"){
+            if(window.location.href.indexOf("/index.html") > -1){
                 const newDiv = document.createElement("div");
                 const newH2 = document.createElement("h2");
                 const newH3 = document.createElement("h3");
