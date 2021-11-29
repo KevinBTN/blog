@@ -3,6 +3,34 @@
 * Copyright 2013-2021 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE)
 */
+
+const postsDiplay = document.getElementById("postsDisplay");
+
+window.addEventListener('load', ()=>{
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => response.json())
+    .then(posts => {
+        posts.forEach(post =>{
+            const newDiv = document.createElement("div");
+            const newH2 = document.createElement("h2");
+            const newH3 = document.createElement("h3");
+            const newA = document.createElement("a");
+            const newHr = document.createElement("hr");
+            postsDiplay.appendChild(newDiv);
+            newDiv.appendChild(newA);
+            newA.appendChild(newH2);
+            newA.appendChild(newH3);
+            postsDiplay.appendChild(newHr);
+            newDiv.classList.add("post-preview");
+            newH2.classList.add("post-title");
+            newH3.classList.add("post-subtitle");   
+            newA.setAttribute("href", "post.html");
+            newH2.textContent = `${post.title}`;
+            newH3.textContent = `${post.body}`;
+        })
+    });
+})
+
 window.addEventListener('DOMContentLoaded', () => {
     let scrollPos = 0;
     const mainNav = document.getElementById('mainNav');
@@ -27,3 +55,4 @@ window.addEventListener('DOMContentLoaded', () => {
         scrollPos = currentTop;
     });
 })
+
