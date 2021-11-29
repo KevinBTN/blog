@@ -9,6 +9,7 @@ const button = document.getElementById("morePosts");
 var displayedPosts = 0;
 const postTitle = document.getElementById("postTitle");
 const postContent = document.getElementById("postContent");
+const authorName = document.getElementById("authorName");
 
 
 const author = (id) =>{
@@ -79,6 +80,7 @@ const fetchPosts = () =>{
                 const postId = document.URL.toString().split("?")[1];
                 postTitle.textContent = `${posts[postId - 1].title}`;
                 postContent.textContent = `${posts[postId - 1].body}`;
+                authorName.textContent = `${author(posts[postId - 1].userId)}`;
             }
         
         }
