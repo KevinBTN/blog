@@ -35,7 +35,7 @@ const fetchPosts = () =>{
                 newH3.classList.add("post-subtitle");   
                 newA.setAttribute("href", "post.html" + "?" + posts[displayedPosts].id);
                 newH2.textContent = `[${posts[displayedPosts].id}] ${posts[displayedPosts].title}`;
-                newH3.textContent = `${description}`;
+                newH3.textContent = `${description}...[Lire la suite]`;
                 displayedPosts++;
             }
             else {
