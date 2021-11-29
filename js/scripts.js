@@ -11,7 +11,40 @@ const postTitle = document.getElementById("postTitle");
 const postContent = document.getElementById("postContent");
 
 
-
+const author = (id) =>{
+    switch(id) {
+        case 1 : 
+            return "Adèle Jérémy";
+            break;
+        case 2 : 
+            return "Albin Léana";
+            break;
+        case 3 : 
+            return "Agathe Kevin";
+            break;
+        case 4 : 
+            return "Nelly Florent";
+            break;
+        case 5 : 
+            return "Arthur Lili";
+            break;
+        case 6 : 
+            return "Amable Gratien";
+            break;
+        case 7 : 
+            return "Édith Antonin";
+            break;
+        case 8 : 
+            return "Véronique Jules";
+            break;
+        case 9 : 
+            return "Lilianne Jérémy";
+            break;
+        case 10 : 
+            return "Jourdain Joffrey";
+            break;
+    }
+}
 
 const fetchPosts = () =>{
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -23,6 +56,7 @@ const fetchPosts = () =>{
                 const newH2 = document.createElement("h2");
                 const newH3 = document.createElement("h3");
                 const newA = document.createElement("a");
+                const newP = document.createElement("p");
                 const newHr = document.createElement("hr");
                 const description = posts[displayedPosts].body.split(' ').slice(0, 3).join(' ');
                 postsDiplay.appendChild(newDiv);
@@ -30,12 +64,15 @@ const fetchPosts = () =>{
                 newA.appendChild(newH2);
                 newA.appendChild(newH3);
                 postsDiplay.appendChild(newHr);
+                newDiv.appendChild(newP);
                 newDiv.classList.add("post-preview");
                 newH2.classList.add("post-title");
                 newH3.classList.add("post-subtitle");   
+                newP.classList.add("post-meta");
                 newA.setAttribute("href", "post.html" + "?" + posts[displayedPosts].id);
                 newH2.textContent = `[${posts[displayedPosts].id}] ${posts[displayedPosts].title}`;
                 newH3.textContent = `${description}...[Lire la suite]`;
+                newP.textContent = `Posté par: ${author(posts[displayedPosts].userId)}`;
                 displayedPosts++;
             }
             else {
