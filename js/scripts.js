@@ -6,14 +6,15 @@
 
 const postsDiplay = document.getElementById("postsDisplay");
 const button = document.getElementById("morePosts");
-const displayedPosts = 0;
+var displayedPosts = 0;
+
 
 
 const fetchPosts = () =>{
     fetch('https://jsonplaceholder.typicode.com/posts')
     .then(response => response.json())
     .then(posts => {
-        for(displayedPosts; displayedPosts = displayedPosts + 10; displayedPosts++){
+        for(let postsCounter = 0; postsCounter < 10; postsCounter++){
             const newDiv = document.createElement("div");
             const newH2 = document.createElement("h2");
             const newH3 = document.createElement("h3");
@@ -28,8 +29,9 @@ const fetchPosts = () =>{
             newH2.classList.add("post-title");
             newH3.classList.add("post-subtitle");   
             newA.setAttribute("href", "post.html");
-            newH2.textContent = `${posts[i].title}`;
-            newH3.textContent = `${posts[i].body}`;
+            newH2.textContent = `[${posts[displayedPosts].id}] ${posts[displayedPosts].title}`;
+            newH3.textContent = `${posts[displayedPosts].body}`;
+            displayedPosts++;
         }
     });
 }
