@@ -24,7 +24,7 @@ const fetchPosts = () =>{
                 const newH3 = document.createElement("h3");
                 const newA = document.createElement("a");
                 const newHr = document.createElement("hr");
-                const description = post.body.split(' ').slice(0, 3).join(' ');
+                const description = posts[displayedPosts].body.split(' ').slice(0, 3).join(' ');
                 postsDiplay.appendChild(newDiv);
                 newDiv.appendChild(newA);
                 newA.appendChild(newH2);
@@ -33,17 +33,18 @@ const fetchPosts = () =>{
                 newDiv.classList.add("post-preview");
                 newH2.classList.add("post-title");
                 newH3.classList.add("post-subtitle");   
-                newA.setAttribute("href", "post.html" + "?" + post.id);
+                newA.setAttribute("href", "post.html" + "?" + posts[displayedPosts].id);
                 newH2.textContent = `[${posts[displayedPosts].id}] ${posts[displayedPosts].title}`;
                 newH3.textContent = `${posts[displayedPosts].body}`;
+                displayedPosts++;
             }
             else {
                 const postId = document.URL.toString().split("?")[1];
                 postTitle.textContent = `${posts[postId - 1].title}`;
                 postContent.textContent = `${posts[postId - 1].body}`;
             }
-        })
-
+        
+        }
     });
 }
 
