@@ -15,35 +15,35 @@ const authorName = document.getElementById("authorName");
 const author = (id) =>{
     switch(id) {
         case 1 : 
-            return "Adèle Jérémy";
-            break;
+        return "Adèle Jérémy";
+        break;
         case 2 : 
-            return "Albin Léana";
-            break;
+        return "Albin Léana";
+        break;
         case 3 : 
-            return "Agathe Kevin";
-            break;
+        return "Agathe Kevin";
+        break;
         case 4 : 
-            return "Nelly Florent";
-            break;
+        return "Nelly Florent";
+        break;
         case 5 : 
-            return "Arthur Lili";
-            break;
+        return "Arthur Lili";
+        break;
         case 6 : 
-            return "Amable Gratien";
-            break;
+        return "Amable Gratien";
+        break;
         case 7 : 
-            return "Édith Antonin";
-            break;
+        return "Édith Antonin";
+        break;
         case 8 : 
-            return "Véronique Jules";
-            break;
+        return "Véronique Jules";
+        break;
         case 9 : 
-            return "Lilianne Jérémy";
-            break;
+        return "Lilianne Jérémy";
+        break;
         case 10 : 
-            return "Jourdain Joffrey";
-            break;
+        return "Jourdain Joffrey";
+        break;
     }
 }
 
@@ -52,40 +52,84 @@ const fetchPosts = () =>{
     .then(response => response.json())
     .then(posts => {
         for(let postsCounter = 0; postsCounter < 10; postsCounter++){
-            if(window.location.href.indexOf("/index.html") > -1){
-                const newDiv = document.createElement("div");
-                const newH2 = document.createElement("h2");
-                const newH3 = document.createElement("h3");
-                const newA = document.createElement("a");
-                const newP = document.createElement("p");
-                const newHr = document.createElement("hr");
-                const description = posts[displayedPosts].body.split(' ').slice(0, 3).join(' ');
-                postsDiplay.appendChild(newDiv);
-                newDiv.appendChild(newA);
-                newA.appendChild(newH2);
-                newA.appendChild(newH3);
-                postsDiplay.appendChild(newHr);
-                newDiv.appendChild(newP);
-                newDiv.classList.add("post-preview");
-                newH2.classList.add("post-title");
-                newH3.classList.add("post-subtitle");   
-                newP.classList.add("post-meta");
-                newA.setAttribute("href", "post.html" + "?" + posts[displayedPosts].id);
-                newH2.textContent = `[${posts[displayedPosts].id}] ${posts[displayedPosts].title}`;
-                newH3.textContent = `${description}...[Lire la suite]`;
-                newP.textContent = `Posté par: ${author(posts[displayedPosts].userId)}`;
-                displayedPosts++;
-            }
-            else {
-                const postId = document.URL.toString().split("?")[1];
-                postTitle.textContent = `${posts[postId - 1].title}`;
-                postContent.textContent = `${posts[postId - 1].body}`;
-                authorName.textContent = `${author(posts[postId - 1].userId)}`;
-            }
-        
+             elements(posts);
         }
     });
 }
+const showpost = (posts, postBody) =>{
+    const toDelete = document.getElementsByClassName("to-delete");
+    const titre = document.getElementById("titre");
+    const newP = document.createElement("p");
+    while (toDelete[0]) {
+        toDelete[0].parentNode.removeChild(toDelete[0]);
+    }
+    button.parentNode.removeChild(button);
+    titre.textContent = posts;
+    postsDiplay.appendChild(newP);
+    newP.textContent = postBody;
+    
+}
+const elements = (posts)=>{
+    const newDiv = document.createElement("div");
+    const newH2 = document.createElement("h2");
+    const newH3 = document.createElement("h3");
+    const newA = document.createElement("a");
+    const newP = document.createElement("p");
+    const newHr = document.createElement("hr");
+    const description = posts[displayedPosts].body.split(' ').slice(0, 3).join(' ');
+    postsDiplay.appendChild(newDiv);
+    newDiv.appendChild(newA);
+    newA.appendChild(newH2);
+    newA.appendChild(newH3);
+    postsDiplay.appendChild(newHr);
+    newDiv.appendChild(newP);
+    newDiv.classList.add("post-preview", "to-delete");
+    newH2.classList.add("post-title");
+    newH3.classList.add("post-subtitle");   
+    newP.classList.add("post-meta");
+    newHr.classList.add("to-delete");
+    newH2.setAttribute("id", posts[displayedPosts].id);
+    newA.addEventListener('click', (e)=>{
+        const id = e.target.id;
+        console.log(id);
+        showpost(posts[id - 1].title, posts[id - 1].body);
+    });
+    newH2.textContent = `[${posts[displayedPosts].id}] ${posts[displayedPosts].title}`;
+    newH3.textContent = `${description}...[Lire la suite]`;
+    newP.textContent = `Posté par: ${author(posts[displayedPosts].userId)}`;
+    displayedPosts++;
+}
+
+
+/*AXIOS */
+// const getPosts = async () =>{ 
+//     const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
+//     const posts = res.data;
+//     return posts;
+// }
+
+
+// const displayPosts = (data)=>{
+//     const newDiv = document.createElement("div");
+//     const newH2 = document.createElement("h2");
+//     const newH3 = document.createElement("h3");
+//     const newA = document.createElement("a");
+//     const newP = document.createElement("p");
+//     const newHr = document.createElement("hr");
+//     postsDiplay.appendChild(newDiv);
+//     newDiv.appendChild(newA);
+//     newA.appendChild(newH2);
+//     newA.appendChild(newH3);
+//     postsDiplay.appendChild(newHr);
+//     newDiv.appendChild(newP);
+//     newDiv.classList.add("post-preview");
+//     newH2.classList.add("post-title");
+//     newH3.classList.add("post-subtitle");   
+//     newP.classList.add("post-meta");
+//     newH2.textContent = `${data.title}`;
+// }
+
+
 
 
 
@@ -113,6 +157,5 @@ window.addEventListener('DOMContentLoaded', () => {
         scrollPos = currentTop;
     });
 })
-
 window.addEventListener('load', fetchPosts);
 button.addEventListener('click', fetchPosts);
