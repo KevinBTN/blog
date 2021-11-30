@@ -74,7 +74,7 @@ const showpost = (posts, postBody) =>{
     newButton.setAttribute("id", "retour");
     newButton.textContent = "Retour aux articles";
     newButton.addEventListener("click", ()=>{
-        window.location.href='/index.html'
+        window.location.href='index.html'
     })
 }
 const elements = (posts)=>{
