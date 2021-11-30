@@ -73,9 +73,7 @@ const showpost = (posts, postBody) =>{
     newButton.setAttribute("type", "button");
     newButton.setAttribute("id", "retour");
     newButton.textContent = "Retour aux articles";
-    newButton.addEventListener("click", ()=>{
-        window.location.href='/index.html'
-    })
+    newButton.setAttribute("href", "index.html");
 }
 const elements = (posts)=>{
     const newDiv = document.createElement("div");
