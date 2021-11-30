@@ -5,7 +5,7 @@
 */
 
 const postsDiplay = document.getElementById("postsDisplay");
-const button = document.getElementById("morePosts");
+const buttonMore = document.getElementById("morePosts");
 var displayedPosts = 0;
 const postTitle = document.getElementById("postTitle");
 const postContent = document.getElementById("postContent");
@@ -60,14 +60,22 @@ const showpost = (posts, postBody) =>{
     const toDelete = document.getElementsByClassName("to-delete");
     const titre = document.getElementById("titre");
     const newP = document.createElement("p");
+    const newButton = document.createElement("button");
     while (toDelete[0]) {
         toDelete[0].parentNode.removeChild(toDelete[0]);
     }
-    button.parentNode.removeChild(button);
+    buttonMore.parentNode.removeChild(buttonMore);
     titre.textContent = posts;
     postsDiplay.appendChild(newP);
     newP.textContent = postBody;
-    
+    postsDiplay.appendChild(newButton);
+    newButton.classList.add("btn", "btn-primary", "text-uppercase");
+    newButton.setAttribute("type", "button");
+    newButton.setAttribute("id", "retour");
+    newButton.textContent = "Retour aux articles";
+    newButton.addEventListener("click", ()=>{
+        window.location.href='/index.html'
+    })
 }
 const elements = (posts)=>{
     const newDiv = document.createElement("div");
@@ -158,4 +166,4 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 })
 window.addEventListener('load', fetchPosts);
-button.addEventListener('click', fetchPosts);
+buttonMore.addEventListener('click', fetchPosts);
