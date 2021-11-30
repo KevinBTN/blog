@@ -60,7 +60,8 @@ const showpost = (posts, postBody) =>{
     const toDelete = document.getElementsByClassName("to-delete");
     const titre = document.getElementById("titre");
     const newP = document.createElement("p");
-    const newButton = document.createElement("button");
+    const newButton = document.createElement("a");
+    const  newSpan = document.createElement("i");
     while (toDelete[0]) {
         toDelete[0].parentNode.removeChild(toDelete[0]);
     }
@@ -72,8 +73,11 @@ const showpost = (posts, postBody) =>{
     newButton.classList.add("btn", "btn-primary", "text-uppercase");
     newButton.setAttribute("type", "button");
     newButton.setAttribute("id", "retour");
-    newButton.textContent = "Retour aux articles";
+    newButton.textContent = " Retour aux articles";
     newButton.setAttribute("href", "index.html");
+    newButton.prepend(newSpan);
+    newSpan.classList.add("fas", "fa-arrow-left");
+    // <i class="fas fa-arrow-left"></i>
 }
 const elements = (posts)=>{
     const newDiv = document.createElement("div");
